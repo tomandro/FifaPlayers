@@ -88,7 +88,7 @@ namespace FifaPlayers.DAOs.Players
             return players;
         }
 
-        public List<Player> SearchPlayers(int league, int club, string nation)
+        public List<Player> SearchPlayers(string league, string club, string nation)
         {
             throw new NotImplementedException();
         }

@@ -11,6 +11,6 @@ namespace FifaPlayers.DAOs.Players
         List<Player> GetPlayers();
         Player GetPlayer(int id);
         List<string> GetNations(string nation);
-        List<Player> SearchPlayers(int league,int club,string nation);
+        List<Player> SearchPlayers(string league,string club,string nation);
     }
 }

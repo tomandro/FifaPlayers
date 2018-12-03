@@ -31,10 +31,11 @@ namespace FifaPlayers.DAOs.Players
 
         public List<Player> GetPlayers()
         {
-            throw new NotImplementedException();
+            List <Player> players = SearchPlayers(null, null, null);
+            return players;
         }
 
-        public List<Player> SearchPlayers(int league, int club, string nation)
+        public List<Player> SearchPlayers(string league, string club, string nation)
         {
             List<Player> players = new List<Player>();
             Dictionary<string, object> parameters = new Dictionary<string, object>();
