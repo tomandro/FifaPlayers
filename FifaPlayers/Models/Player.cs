@@ -16,6 +16,7 @@ namespace FifaPlayers.Models
         public string Club;
         public string Nationality;
         public string Position;
+        public string League;
 
     }
 }
