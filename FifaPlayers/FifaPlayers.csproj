@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Clubs\" />
-    <Folder Include="Controllers\Leagues\" />
   </ItemGroup>
 
 </Project>
