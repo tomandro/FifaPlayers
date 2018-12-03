@@ -11,8 +11,4 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.5.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\Clubs\" />
-  </ItemGroup>
-
 </Project>
