@@ -1,0 +1,11 @@
+C:\Users\Thomas\Source\Repos\FifaPlayers\ImportFifaPlayers\bin\Debug\netcoreapp2.1\ImportFifaPlayers.deps.json
+C:\Users\Thomas\Source\Repos\FifaPlayers\ImportFifaPlayers\bin\Debug\netcoreapp2.1\ImportFifaPlayers.runtimeconfig.json
+C:\Users\Thomas\Source\Repos\FifaPlayers\ImportFifaPlayers\bin\Debug\netcoreapp2.1\ImportFifaPlayers.runtimeconfig.dev.json
+C:\Users\Thomas\Source\Repos\FifaPlayers\ImportFifaPlayers\bin\Debug\netcoreapp2.1\ImportFifaPlayers.dll
+C:\Users\Thomas\Source\Repos\FifaPlayers\ImportFifaPlayers\obj\Debug\netcoreapp2.1\ImportFifaPlayers.csprojAssemblyReference.cache
+C:\Users\Thomas\Source\Repos\FifaPlayers\ImportFifaPlayers\obj\Debug\netcoreapp2.1\ImportFifaPlayers.csproj.CoreCompileInputs.cache
+C:\Users\Thomas\Source\Repos\FifaPlayers\ImportFifaPlayers\obj\Debug\netcoreapp2.1\ImportFifaPlayers.AssemblyInfoInputs.cache
+C:\Users\Thomas\Source\Repos\FifaPlayers\ImportFifaPlayers\obj\Debug\netcoreapp2.1\ImportFifaPlayers.AssemblyInfo.cs
+C:\Users\Thomas\Source\Repos\FifaPlayers\ImportFifaPlayers\bin\Debug\netcoreapp2.1\ImportFifaPlayers.pdb
+C:\Users\Thomas\Source\Repos\FifaPlayers\ImportFifaPlayers\obj\Debug\netcoreapp2.1\ImportFifaPlayers.dll
+C:\Users\Thomas\Source\Repos\FifaPlayers\ImportFifaPlayers\obj\Debug\netcoreapp2.1\ImportFifaPlayers.pdb

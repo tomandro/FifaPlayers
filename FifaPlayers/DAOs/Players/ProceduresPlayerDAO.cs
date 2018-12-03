@@ -1,0 +1,58 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
+using FifaPlayers.DAOs.Clubs;
+using FifaPlayers.Models;
+using FifaPlayers.Utils;
+
+namespace FifaPlayers.DAOs.Players
+{
+    public class ProceduresPlayerDAO : PlayerDAO
+    {
+        private Procedures proc;
+        private ClubDAO clubDAO;
+        public ProceduresPlayerDAO(Procedures proc,ClubDAO clubDAO)
+        {
+            this.proc = proc;
+            this.clubDAO = clubDAO;
+        }
+
+        public List<string> GetNations(string nation)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Player GetPlayer(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Player> GetPlayers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Player> SearchPlayers(int league, int club, string nation)
+        {
+            List<Player> players = new List<Player>();
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@club", club);
+            parameters.Add("@league", club);
+            parameters.Add("@nation", club);
+            DataTable playerTable = proc.ExectuteStoredProcedureForValues("dbo.usp_players_search_players", parameters);
+
+            foreach (DataRow playerRow in playerTable.Rows)
+            {
+                Player player = new Player()
+                {
+                    Id = (int)playerRow["id"],
+                    Name = playerRow["name"].ToString()
+                };
+                players.Add(player);
+            }
+            return players;
+        }
+    }
+}

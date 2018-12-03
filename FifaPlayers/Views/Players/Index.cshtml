@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewData["Title"] = "Players";
+
+}
+@{
+    // Since Address isn't a string, it requires a cast.
+    var playersList = ViewData["Players"] as List<Player>;
+    Player[] players = playersList.ToArray();
+}
+
+<h2>
+    There are @players.Length items in the list.
+</h2>
+
+
+<script>
+    function toFeet(n) {
+        var realFeet = ((n * 0.393700) / 12);
+        var feet = Math.floor(realFeet);
+        var inches = Math.round((realFeet - feet) * 12);
+        return feet + "\" " + inches + '\'';
+    }
+
+    //holds player object and 
+    function PlayerRow(player)
+    {
+        self = this;
+        self.player = player;
+        self.formattedHeight = ko.computed(function () {
+            return toFeet(self.player.height);
+        });    
+    }
+
+    function PlayersViewModel() {
+        var self = this;
+
+        // Non-editable catalog data - would come from the server
+        self.serverplayers = [
+        @for (int i = 0; i < players.Length; i++)
+        {
+            @if (i != players.Length - 1)
+            {
+                @:{name:"@players[i].Name",age:"@players[i].Age",height:"@players[i].Height",weight:"@players[i].Weight",rating:"@players[i].Rating",club:"@players[i].Club",position:"@players[i].Position",nationality:"@players[i].Nationality"},
+            }
+            else
+            {
+                @:{name:"@players[i].Name",age:"@players[i].Age",height:"@players[i].Height",weight:"@players[i].Weight",rating:"@players[i].Rating",club:"@players[i].Club",position:"@players[i].Position",nationality:"@players[i].Nationality"}
+            }
+        }
+        ];
+
+        self.players = [];
+        for (player in self.serverplayers)
+        {
+            self.players.push(new PlayerRow(self.serverplayers[player]));
+        }
+
+        self.shout = function (player) {
+            alert(player.player.name);
+        }
+    }
+
+    window.onload = function () {
+        ko.applyBindings(new PlayersViewModel());
+    }
+</script>
+<div data-bind="foreach: players">
+    <div class="row" data-bind="click: $root.shout">
+
+        <div class="col-md-4">Name: <span data-bind="text: player.name"></span></div>
+
+        <div class="col-md-2">Age: <span data-bind="text: player.age"></span></div>
+
+        <div class="col-md-2">Club: <span data-bind="text: player.club"></span></div>
+
+        <div class="col-md-2">Position: <span data-bind="text: player.position"></span></div>
+
+        <div class="col-md-2">Rating: <span data-bind="text: player.rating"></span></div>
+
+    </div>
+    <div class="row">
+
+        <div class="col-md-6">Height: <span data-bind="text: formattedHeight"></span></div>
+
+        <div class="col-md-6">Weight: <span data-bind="text: player.weight"></span></div>
+
+    </div>
+</div>
