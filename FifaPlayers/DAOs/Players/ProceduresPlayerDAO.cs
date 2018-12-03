@@ -40,8 +40,8 @@ namespace FifaPlayers.DAOs.Players
             List<Player> players = new List<Player>();
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@club", club);
-            parameters.Add("@league", club);
-            parameters.Add("@nation", club);
+            parameters.Add("@league", league);
+            parameters.Add("@nation", nation);
             DataTable playerTable = proc.ExectuteStoredProcedureForValues("dbo.usp_players_search_players", parameters);
 
             foreach (DataRow playerRow in playerTable.Rows)
@@ -49,7 +49,13 @@ namespace FifaPlayers.DAOs.Players
                 Player player = new Player()
                 {
                     Id = (int)playerRow["id"],
-                    Name = playerRow["name"].ToString()
+                    Name = playerRow["player_name"].ToString(),
+                    Height = (int)playerRow["height"],
+                    Weight = (int)playerRow["weight"],
+                    Rating = (int)playerRow["rating"],
+                    Club = playerRow["club_name"].ToString(),
+                    Nationality = playerRow["nation"].ToString(),
+                    League = playerRow["league_name"].ToString()
                 };
                 players.Add(player);
             }
