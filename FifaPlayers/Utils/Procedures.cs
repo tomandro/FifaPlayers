@@ -15,7 +15,8 @@ namespace FifaPlayers.Utils
         public Procedures(IConfiguration config)
         {
             this.config = config;
-            conn = new SqlConnection(config["connectionString"]);
+            String connectionString = config["connectionString"];
+            conn = new SqlConnection(connectionString);
             conn.Open();
         }
 
@@ -44,7 +45,7 @@ namespace FifaPlayers.Utils
         {
             try
             {
-                DataTable dataTable = null;
+                DataTable dataTable = new DataTable();
                 using (SqlCommand cmd = new SqlCommand(storedProcedureName, conn))
                 {
                     foreach (var key in parameters.Keys)
