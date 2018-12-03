@@ -1,3 +1,5 @@
 .vs/
-FifaPlayers/bin/
-FifaPlayers/obj/
+*/**/bin/Debug
+*/**/bin/Release
+*/**/obj/Debug
+*/**/obj/Release
