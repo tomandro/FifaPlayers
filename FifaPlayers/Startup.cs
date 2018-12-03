@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FifaPlayers.DAOs.Clubs;
+using FifaPlayers.DAOs.Leagues;
 using FifaPlayers.DAOs.Players;
+using FifaPlayers.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,7 +38,11 @@ namespace FifaPlayers
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             var ty = typeof(String);
-            services.AddTransient(typeof(PlayerDAO), typeof(PlayerTestingDAO));
+
+            services.AddSingleton(typeof(Procedures), typeof(Procedures));
+            services.AddSingleton(typeof(LeagueDAO), typeof(ProceduresLeagueDAO));
+            services.AddSingleton(typeof(ClubDAO), typeof(ProceduresClubDAO));
+            services.AddSingleton(typeof(PlayerDAO), typeof(ProceduresPlayerDAO));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
