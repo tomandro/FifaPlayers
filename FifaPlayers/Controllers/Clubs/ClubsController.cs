@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FifaPlayers.DAOs.Clubs;
+using FifaPlayers.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FifaPlayers.Controllers.Clubs
@@ -19,6 +20,13 @@ namespace FifaPlayers.Controllers.Clubs
         public IActionResult Index()
         {
             return View();
+        }
+
+        [Route("SearchClubs")]
+        public JsonResult SearchClubs(string club)
+        {
+            List<Club> clubs = clubDAO.SearchClubNames(club);
+            return Json(clubs);
         }
     }
 }
