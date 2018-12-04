@@ -53,6 +53,7 @@ namespace FifaPlayers.DAOs.Players
                     Height = (int)playerRow["height"],
                     Weight = (int)playerRow["weight"],
                     Rating = (int)playerRow["rating"],
+                    Age = (int)playerRow["age"],
                     Club = playerRow["club_name"].ToString(),
                     Nationality = playerRow["nation"].ToString(),
                     League = playerRow["league_name"].ToString()

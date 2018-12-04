@@ -55,7 +55,7 @@
         self.clubOptions = ko.observableArray([]);
 
 
-        self.players = [];
+        self.players = ko.observableArray([]);
         for (player in self.serverplayers)
         {
             self.players.push(new PlayerRow(self.serverplayers[player]));
@@ -118,6 +118,28 @@
             console.log("selected club " + club.name);
             $('#clubInputElement').val(club.name);
         }
+
+        self.searchPlayers = function () {
+            console.log('search players');
+            var url = {};
+            var league = $('#leagueInputElement').val();
+            var club = $('#clubInputElement').val();
+            if (club != "") {
+                url.club = club;
+            }
+            if (league != "") {
+                url.league = league;
+            }
+            $.get("Players/SearchPlayers?", 
+                url, function (data) {
+                    console.log("Searched players length=" + data.length);
+                    self.serverplayers = data;
+                    self.players.removeAll();
+                    for (player in self.serverplayers) {
+                        self.players.push(new PlayerRow(self.serverplayers[player]));
+                    }
+            });
+        }
     }
 
     window.onload = function () {
@@ -134,6 +156,11 @@
     #searchBoxes
     {
         margin:5px;
+    }
+
+    .row
+    {
+        margin-top:5px;
     }
 </style>
 <div class="row" id="leagueSearchDiv">
@@ -173,6 +200,12 @@
 
             </div>
         </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-2 offset-lg-10">
+        <button class="btn btn-default" data-bind="click: searchPlayers">Search</button>
     </div>
 </div>
 
