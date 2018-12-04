@@ -10,6 +10,6 @@ namespace FifaPlayers.DAOs.Clubs
     {
         List<Club> GetClubs();
         Club GetClub(int id);
-        List<Club> SearchClubNames(string clubName);
+        List<Club> SearchClubNames(string clubName,string leagueName);
     }
 }

@@ -29,11 +29,13 @@ namespace FifaPlayers.DAOs.Clubs
             throw new NotImplementedException();
         }
 
-        public List<Club> SearchClubNames(string clubName)
+        public List<Club> SearchClubNames(string clubName,string leagueName)
         {
             List<Club> clubs = new List<Club>();
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@club", clubName);
+
+            parameters.Add("@league", leagueName);
             DataTable clubsTable = proc.ExectuteStoredProcedureForValues("dbo.usp_clubs_search_club", parameters);
 
             foreach (DataRow clubRow in clubsTable.Rows)

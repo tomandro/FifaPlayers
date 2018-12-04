@@ -96,8 +96,14 @@
         //called when user is typing in clubs to offer suggestions via the dropdown.
         self.clubSearch = function (data, event) {
             var currentSearch = event.currentTarget.value;
+            
             if (currentSearch != "") {
-                $.get("Clubs/SearchClubs?club=" + currentSearch, function (data) {
+                var url = { club: currentSearch };
+                var league = $('#leagueInputElement').val();
+                if (league != "") {
+                    url.league = league;
+                }
+                $.get("Clubs/SearchClubs",url, function (data) {
                     console.log('got club data for ' + currentSearch + "; Applicable clubs =" + data.length);
                     self.clubOptions.removeAll();
                     $.each(data, function (index, value) {

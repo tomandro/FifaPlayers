@@ -23,9 +23,9 @@ namespace FifaPlayers.Controllers.Clubs
         }
 
         [Route("SearchClubs")]
-        public JsonResult SearchClubs(string club)
+        public JsonResult SearchClubs(string club,string league=null)
         {
-            List<Club> clubs = clubDAO.SearchClubNames(club);
+            List<Club> clubs = clubDAO.SearchClubNames(club,league);
             return Json(clubs);
         }
     }
