@@ -51,6 +51,9 @@
         self.league = ko.observable("");
         self.leagueOptions = ko.observableArray([]);
 
+        self.club = ko.observable("");
+        self.clubOptions = ko.observableArray([]);
+
 
         self.players = [];
         for (player in self.serverplayers)
@@ -88,6 +91,33 @@
             console.log("selected league " + league.name);
             $('#leagueInputElement').val(league.name);
         }
+
+
+        //called when user is typing in clubs to offer suggestions via the dropdown.
+        self.clubSearch = function (data, event) {
+            var currentSearch = event.currentTarget.value;
+            if (currentSearch != "") {
+                $.get("Clubs/SearchClubs?club=" + currentSearch, function (data) {
+                    console.log('got club data for ' + currentSearch + "; Applicable clubs =" + data.length);
+                    self.clubOptions.removeAll();
+                    $.each(data, function (index, value) {
+                        self.clubOptions.push(value);
+                    });
+                    //open the dropdown options for the user to see if it isn't already open
+                    if ($('#clubDropdownbutton').attr('aria-expanded') == "false") {
+                        $('#clubDropdownbutton').click();
+                    }
+                    //Give back focus to where they were typing.
+                    $('#clubInputElement').focus();
+                });
+            }
+        }
+
+        //called when a dropdown club is selected.
+        self.selectClub = function (club) {
+            console.log("selected club " + club.name);
+            $('#clubInputElement').val(club.name);
+        }
     }
 
     window.onload = function () {
@@ -106,7 +136,7 @@
         margin:5px;
     }
 </style>
-<div class="row" id="searchBoxes">
+<div class="row" id="leagueSearchDiv">
     <div class="col-lg-8 offset-lg-4">
         <div id="leagueInput" class="input-group">
             <div class="input-group-append">
@@ -124,37 +154,28 @@
                 </div>
          </div>
     </div>
+</div>
 
+<div class="row" id="clubSearchDiv">
     <div class="col-lg-8 offset-lg-4">
         <div id="clubInput" class="input-group">
             <div class="input-group-append">
                 <span class="input-group-text" id="basic-addon1">Club</span>
             </div>
-            <input type="text" class="form-control" aria-label="Text input with dropdown button">
+            <input id="clubInputElement" type="text" class="form-control" aria-label="Text input with dropdown button" data-bind="value: club,valueUpdate: 'afterkeydown', event: { 'keyup': clubSearch }">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                <div class="dropdown-menu">
-                    <!-- <a class="dropdown-item" href="#">Action</a>-->
-                </div>
-            </div>
-        </div>
-    </div>
+                <button id="clubDropdownbutton" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
 
-    <div class="col-lg-8 offset-lg-4">
-        <div id="nationInput" class="input-group">
-            <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon1">Nation</span>
-            </div>
-            <input type="text" class="form-control" aria-label="Text input with dropdown button">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                <div class="dropdown-menu">
-                    <!-- <a class="dropdown-item" href="#">Action</a>-->
+                <div id="clubDropDown" class="dropdown-menu" data-bind="foreach: clubOptions">
+
+                    <a class="dropdown-item" href="#" data-bind="text: name,click: $root.selectClub"></a>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
+
 <div class="players"> 
     <div data-bind="foreach: players">
         <div class="player">
