@@ -67,7 +67,7 @@
 
         //called when user is typing in leagues to offer suggestions via the dropdown.
         self.leagueSearch = function (data, event) {
-            var currentSearch = event.currentTarget.value;
+            var currentSearch = self.league();
             if (currentSearch != "") {
                 $.get("Leagues/SearchLeagues?league=" + currentSearch, function (data) {
                     console.log('got league data for ' + currentSearch + "; Applicable leagues =" + data.length);
@@ -89,7 +89,7 @@
         //called when a dropdown league is selected.
         self.selectLeague = function (league) {
             console.log("selected league " + league.name);
-            $('#leagueInputElement').val(league.name);
+            self.league(league.name);
         }
 
 
@@ -98,8 +98,10 @@
             var currentSearch = event.currentTarget.value;
             
             if (currentSearch != "") {
-                var url = { club: currentSearch };
-                var league = $('#leagueInputElement').val();
+                var url = {
+                    club: currentSearch
+                };
+                var league = self.league();
                 if (league != "") {
                     url.league = league;
                 }
@@ -122,14 +124,14 @@
         //called when a dropdown club is selected.
         self.selectClub = function (club) {
             console.log("selected club " + club.name);
-            $('#clubInputElement').val(club.name);
+            self.club(club.name);
         }
 
         self.searchPlayers = function () {
             console.log('search players');
             var url = {};
-            var league = $('#leagueInputElement').val();
-            var club = $('#clubInputElement').val();
+            var league = self.league();
+            var club = self.club();
             if (club != "") {
                 url.club = club;
             }
